@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hafez Companion Support</title>
+<meta name="description" content="Support and frequently asked questions for the Hafez Companion Quran recitation app." />
+<style>
+  :root {
+    --bg: #faf7f1;
+    --bg-raised: #f2ede2;
+    --ink: #1b211f;
+    --ink-muted: #5c6864;
+    --ink-faint: #8b948f;
+    --accent: #0c7a73;
+    --accent-ink: #ffffff;
+    --rule: #e2dccc;
+    --rule-strong: #cfc7b1;
+    --summary-bg: #eef4f0;
+    --summary-border: #b9d6c9;
+    --serif: Iowan Old Style, Palatino Linotype, Palatino, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --measure: 40rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121615;
+      --bg-raised: #191f1d;
+      --ink: #edefec;
+      --ink-muted: #96a49f;
+      --ink-faint: #647169;
+      --accent: #45d8d0;
+      --accent-ink: #06201d;
+      --rule: #262e2b;
+      --rule-strong: #384039;
+      --summary-bg: #16211d;
+      --summary-border: #2a4a3f;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #121615;
+    --bg-raised: #191f1d;
+    --ink: #edefec;
+    --ink-muted: #96a49f;
+    --ink-faint: #647169;
+    --accent: #45d8d0;
+    --accent-ink: #06201d;
+    --rule: #262e2b;
+    --rule-strong: #384039;
+    --summary-bg: #16211d;
+    --summary-border: #2a4a3f;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #faf7f1;
+    --bg-raised: #f2ede2;
+    --ink: #1b211f;
+    --ink-muted: #5c6864;
+    --ink-faint: #8b948f;
+    --accent: #0c7a73;
+    --accent-ink: #ffffff;
+    --rule: #e2dccc;
+    --rule-strong: #cfc7b1;
+    --summary-bg: #eef4f0;
+    --summary-border: #b9d6c9;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: 3rem;
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 6rem;
+  }
+
+  @media (max-width: 860px) {
+    .shell { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; padding: 2rem 1.25rem 4rem; }
+  }
+
+  nav.toc {
+    position: sticky;
+    top: 2.5rem;
+    align-self: start;
+    font-family: var(--sans);
+  }
+  @media (max-width: 860px) {
+    nav.toc { position: static; }
+  }
+  .toc-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 0.85rem;
+  }
+  .toc-list { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--rule); }
+  .toc-list li { margin: 0; }
+  .toc-list a {
+    display: block;
+    padding: 0.4rem 0 0.4rem 0.9rem;
+    margin-left: -1px;
+    border-left: 1px solid transparent;
+    color: var(--ink-muted);
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+  .toc-list a:hover { color: var(--ink); border-left-color: var(--rule-strong); }
+
+  main { max-width: var(--measure); min-width: 0; }
+
+  .doc-header { margin-bottom: 2.25rem; }
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 2.25rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.6rem;
+    text-wrap: balance;
+  }
+  .effective-date {
+    color: var(--ink-muted);
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  .summary-box {
+    background: var(--summary-bg);
+    border: 1px solid var(--summary-border);
+    border-radius: 10px;
+    padding: 1.15rem 1.35rem;
+    margin: 1.75rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--ink);
+  }
+  .summary-box p { margin: 0 0 0.5rem; }
+  .summary-box p:last-child { margin-bottom: 0; }
+  .summary-box strong { font-weight: 600; }
+
+  section { padding-top: 2.5rem; margin-top: 2.5rem; border-top: 1px solid var(--rule); scroll-margin-top: 2rem; }
+  section:first-of-type { border-top: none; margin-top: 2.75rem; padding-top: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.375rem;
+    letter-spacing: -0.005em;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    margin: 1.5rem 0 0.6rem;
+  }
+
+  p { margin: 0 0 1rem; color: var(--ink); }
+  p.lede { color: var(--ink-muted); }
+  ul, ol { margin: 0 0 1rem; padding-left: 1.25rem; }
+  li { margin-bottom: 0.45rem; }
+  li:last-child { margin-bottom: 0; }
+
+  .contact-box {
+    background: var(--summary-bg);
+    border: 1px solid var(--summary-border);
+    border-radius: 10px;
+    padding: 1.15rem 1.35rem;
+    margin: 1.25rem 0;
+    font-size: 0.9375rem;
+  }
+  .contact-box p { margin: 0; }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-faint);
+    font-size: 0.8125rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <nav class="toc" aria-label="Sections">
+    <p class="toc-label">On this page</p>
+    <ul class="toc-list">
+      <li><a href="#contact">Contact us</a></li>
+      <li><a href="#getting-started">Getting started</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header class="doc-header">
+      <p class="eyebrow">Support</p>
+      <h1>Hafez Companion Support</h1>
+      <p class="effective-date">Help with setup, recitation tracking, and troubleshooting</p>
+
+      <div class="summary-box">
+        <p>Hafez Companion is an offline Quran recitation companion that listens as you recite — entirely on
+        your device — to follow along, offer hints, and track your progress. If something isn't working as
+        expected, the answers below cover the most common questions. For anything else, reach out directly.</p>
+      </div>
+    </header>
+
+    <section id="contact">
+      <h2>Contact us</h2>
+      <div class="contact-box">
+        <p>Email <a href="mailto:salatplus25@gmail.com">salatplus25@gmail.com</a> with a description of the
+        issue, your device model, and OS version. We read and respond to every message.</p>
+      </div>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting started</h2>
+      <p>The first time you open Hafez Companion, it downloads a speech recognition model (used to follow your
+      recitation) and, optionally, an audio pack for Imam+ mode hints. This is a one-time setup — once it
+      completes, the app works fully offline.</p>
+      <ul>
+        <li><strong>Keep the app open</strong> during setup, on Wi-Fi if possible. The screen can lock; the
+        download continues in the background.</li>
+        <li><strong>Grant microphone access</strong> when prompted — Recite, Memorize, and Imam mode all need
+        it to track your recitation. You can change this later in your device's Settings app.</li>
+      </ul>
+    </section>
+
+    <section id="faq">
+      <h2>Frequently asked questions</h2>
+
+      <h3>What is Imam mode?</h3>
+      <p>Imam mode is for the person leading the prayer, reciting from memory. It listens as you recite and
+      gives you a quiet hint if you pause too long or seem to lose your place, so you can keep leading with
+      confidence. It also tracks each raka automatically as you move through the prayer.</p>
+
+      <h3>The app isn't recognizing my recitation. What should I check?</h3>
+      <ul>
+        <li>Make sure microphone access is granted in your device's Settings.</li>
+        <li>Recite at a normal pace and volume, close to the microphone, in a reasonably quiet space.</li>
+        <li>Confirm the one-time model download finished — a stalled setup download will prevent recitation
+        tracking from working at all.</li>
+      </ul>
+
+      <h3>Does Hafez Companion need an internet connection?</h3>
+      <p>Only for the initial setup download and for downloading Quran audio you haven't played before.
+      Once downloaded, recitation tracking and reading work fully offline.</p>
+
+      <h3>Does Hafez Companion require an account?</h3>
+      <p>No. There's no sign-in, and the app doesn't ask for your name or email. See the
+      <a href="/privacy-policy.html">Privacy Policy</a> for details on what the app does and doesn't collect.</p>
+
+      <h3>How do I delete my data?</h3>
+      <p>Everything Hafez Companion stores lives only on your device. Uninstalling the app removes all of it —
+      there's no account or server-side copy to delete separately.</p>
+    </section>
+
+    <footer>
+      Hafez Companion — offline Quran recitation companion.
+    </footer>
+  </main>
+</div>
+</body>
+</html>
